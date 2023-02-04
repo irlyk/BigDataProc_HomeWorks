@@ -5,10 +5,10 @@ services:
     image: hadoop-master-image
     build:
       context: .
-      dockerfile: # Ваш код
+      dockerfile: ./master/Dockerfile
     ports:
-      # Ваш код     # Namenode
-      # Ваш код     # Resource Manager
+      - '9870:9870'     # Namenode
+      - '8088:8088'     # Resource Manager
       - "19888:19888"   # History Server
     container_name: master
     volumes: 
@@ -21,13 +21,13 @@ services:
     image: hadoop-worker-image
     build:
       context: .
-      dockerfile: # Ваш код
+      dockerfile: ./worker/Dockerfile
     networks:
       - hd-network
 
 networks:
   hd-network: # Network
-    driver: # Ваш код
+    driver: bridge
     ipam:
       config:
-      # Ваш код
+        - subnet:  172.18.0.0/24      # Определение пространства адресов сети

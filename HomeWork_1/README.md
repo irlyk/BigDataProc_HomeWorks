@@ -101,3 +101,32 @@ volumes:
 ```
 docker-compose up -d --scale worker=4
 ```
+
+### Выполнение домашнего задания
+
+сборка `master` образа (платформа указана для запуска под macOs M1)
+
+`docker build --platform=linux/amd64 -f ubuntu.Dockerfile -t hadoop-base-image .`
+
+![Сборка hadoop-base-image](./img/docker/docker_build.png)
+
+​                                                                Рисунок 4. Сборка hadoop-base-image
+
+С помощью `docker-compose` происходит сборка и запуск *master* и *worker* контейнеров
+
+![Сборка master и worker контейнеров](./img/docker/docker_compose.png)
+
+​                                                                Рисунок 5. Сборка master и worker контейнеров
+
+
+Доступ к веб-интерфейсу можно получить через браузер.
+
+![Веб-интерфейс hadoop](./img/docker/hadoop.png)
+
+​                                                                Рисунок 6. веб-интерфейс hadoop
+
+Доступ к веб-интерфейсу Namenodes:
+
+![Веб-интерфейс namenodes](./img/docker/Namenodes.png)
+
+​                                                                Рисунок 7. веб-интерфейс Namenodes

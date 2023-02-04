@@ -140,7 +140,48 @@ docker exec master bash \
 
 Выполните команду в master-node кластера по просмотру содержимого `hdfs`  содержимого каждого файла результата. Результат представьте в виде кода команд и снимков экрана с результатом выполнения команд в терминале и с помощью Hadoop Web UI.
 
+Запуск `mapReduce` с помощью `yarn`
 
+```
+docker exec master bash yarn jar /home/bigdata/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.1.2.jar \
+                            -D mapreduce.job.reduces=2 \
+                            -file /home/bigdata/app/py/wordcountapp/tokenizer_mapper.py -mapper 'python tokenizer_mapper.py' \
+                            -file /home/bigdata/app/py/wordcountapp/intsum_reducer.py -reducer 'python intsum_reducer.py' \
+                            -input /data/Fahrenheit_451.txt \
+                            -output /data/output
+```
+
+<center>
+
+![MapReduce executing](./img/yarn_executing.png "MapReduce executing")
+
+<i>Figure 6. MapReduce executing</i>
+
+</center>
+
+В веб-интерфейсе можно просмотреть информацию о выполнении `map-reduce`
+
+<center>
+
+![MapReduce application](./img/hd_application.png "MapReduce application")
+
+<i>Figure 7. MapReduce application result</i>
+
+</center>
+
+Можно посмотреть результат выполнения
+
+<center>
+
+![MapReduce output list](./img/output_list.png "MapReduce output list")
+
+<i>Figure 8. MapReduce output list files</i>
+
+![MapReduce output result](./img/output_result.png "MapReduce output result")
+
+<i>Figure 9. MapReduce output result (last 10)</i>
+
+</center>
 
 После выполнения остановите контейнеры:
 
